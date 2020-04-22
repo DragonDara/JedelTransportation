@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+      <div class="col-4 mt-3"  *ngFor="let product of products">
+        <div class="card mx-auto p-3" style="width: 18rem;"  style="margin: 3px;">
+          <img class="card-img-top"   [src]="product.images[0]" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"> {{product.productname}}</h5>
+            <p class="card-text">{{product.description}}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{product.cost}}</li>
+            <li class="list-group-item">{{product.weight}}</li>
+            <li class="list-group-item">{{product.volume}}</li>
+          </ul>
+          <div class="card-body">
+            <a class="card-link btn btn-primary text-white" (click)="onRespondProduct(product)">Respond</a>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

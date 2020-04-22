@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ng-complete-guide-8c51b": {
+      "hosting": {
+        "jedel-transportation": [
+          "ng-complete-guide-8c51b"
+        ]
+      }
+    }
+  }
+}
