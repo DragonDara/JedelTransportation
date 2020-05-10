@@ -6,12 +6,18 @@ export class Product {
   public weight: number;
   public volume: number;
   public cost: number;
+  public currency: string;
   public description: string;
   public producttype: string;
-  public images:any[];
+  public respondedcount?: number
+  public images?:any[];
   public user: User;
+  public userid: User;
+  public whereto: string;
+  public wherefrom: string;
+  public when: Date
 
-  constructor(productname: string, weight: number, volume: number, cost: number, description: string, images: any[], user: User, producttype: string, productid: number) {
+  constructor(productname: string, weight: number, volume: number, cost: number, description: string, images: any[], user: User, producttype: string, productid: number,userid:User, currency:string, when: Date,wherefrom:string, respondedcount?: number) {
     this.productid = productid;
     this.productname = productname;
     this.weight = weight;
@@ -21,5 +27,11 @@ export class Product {
     this.images = images;
     this.user = user;
     this.producttype = producttype;
+    this.respondedcount = respondedcount;
+    this.userid = userid;
+    this.currency = currency;
+    this.when = when;
+    this.wherefrom = wherefrom;
+    this.whereto = this.whereto;
   }
 }

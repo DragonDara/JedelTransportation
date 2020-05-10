@@ -1,0 +1,24 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Product Type</th>
+        <th scope="col">Volume</th>
+        <th scope="col">Weight</th>
+        <th scope="col">Description</th>
+        <th scope="col">Responded By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let userproduct of userproducts; let index = i">
+        <th scope="row"> <a [routerLink]="[userproduct.productid, 'profile']" >{{userproduct.productid}}</a> </th>
+        <td>{{userproduct.productname}}</td>
+        <td>{{userproduct.producttype}}</td>
+        <td>{{userproduct.volume}}</td>
+        <td>{{userproduct.weight}}</td>
+        <td>{{userproduct.description}}</td>
+        <td> {{ userproduct["respondedcount"] == undefined  ? 'No respond' : userproduct.respondedcount}} </td>
+      </tr>
+    </tbody>
+  </table>

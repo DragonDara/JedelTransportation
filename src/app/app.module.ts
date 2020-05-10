@@ -19,9 +19,18 @@ import { ProductComponent } from './products/product/product.component';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 
-import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import {
+  AngularFireStorageModule,
+} from "@angular/fire/storage";
+import {  AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { UserproductComponent } from './userproduct/userproduct.component';
+import { UserproductprofileComponent } from './userproduct/userproductprofile/userproductprofile.component';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { MessagesComponent } from './userproduct/messages/messages.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AdminComponent } from './admin/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +40,11 @@ import { AngularFireDatabase } from '@angular/fire/database';
     SpinnerLoadingComponent,
     ProductsComponent,
     ProductComponent,
+    UserproductComponent,
+    UserproductprofileComponent,
+    MessagesComponent,
+    ProfileComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -41,9 +55,11 @@ import { AngularFireDatabase } from '@angular/fire/database';
     BrowserAnimationsModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAnalyticsModule,
     AngularFirestoreModule,
-    AngularFireDatabase
+    AngularFireDatabaseModule,
+    AngularFireMessagingModule,
+    AngularFireStorageModule,
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [
     {

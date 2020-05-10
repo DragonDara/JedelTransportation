@@ -1,16 +1,69 @@
 <div class="container">
+  <div class="row" *ngIf="respondedProductAdded">
+    <div class="col-md-12">
+      <div class="alert alert-success text-center" role="alert">
+        A simple success alert—check it out!
+      </div>
+    </div>
+  </div>
+  <div class="mt-2 row">
+    <div class="col-lg-12">
+      <form #filterForm="ngForm" (ngSubmit)="onFilterProducts(filterForm)">
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <input
+              class="form-control"
+              placeholder="search by from"
+              name="searchbydepature"
+              id="searchbydepature"
+              ngModel
+              #searchbydepature="ngModel"
+           />
+          </div>
+          <div class="form-group col-md-3">
+            <input
+              class="form-control"
+              id="searchbydestination"
+              placeholder="search by to"
+              name="searchbydestination"
+              ngModel
+              #searchbydestination="ngModel"
+
+           />
+          </div>
+          <div class="form-group col-md-3">
+            <input
+              class="form-control"
+              type="date"
+              id="searchbydate"
+              placeholder="search by date"
+              name="searchbydate"
+              ngModel
+              #searchbydate="ngModel"
+           />
+          </div>
+          <div class="form-group col-md-3">
+            <button type="submit" class="btn btn-primary mr-2">Apply</button>
+            <button type="button" class="btn btn-primary" (click)="onClear()">Clear</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
   <div class="row">
       <div class="col-4 mt-3"  *ngFor="let product of products">
         <div class="card mx-auto p-3" style="width: 18rem;"  style="margin: 3px;">
-          <img class="card-img-top"   [src]="product.images[0]" alt="Card image cap">
+          <img class="card-img-top"   [src]="product.payload.doc.data().images[0]" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title"> {{product.productname}}</h5>
-            <p class="card-text">{{product.description}}</p>
+            <h5 class="card-title"> Product: {{product.payload.doc.data().productname}}</h5>
+            <p class="card-text"> Description: {{product.payload.doc.data().description}}</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{product.cost}}</li>
-            <li class="list-group-item">{{product.weight}}</li>
-            <li class="list-group-item">{{product.volume}}</li>
+            <li class="list-group-item">Cost: {{product.payload.doc.data().cost}}</li>
+            <li class="list-group-item">To: {{product.payload.doc.data().whereto}}</li>
+            <li class="list-group-item">From: {{product.payload.doc.data().wherefrom}}</li>
+            <li class="list-group-item">When: {{product.payload.doc.data().when}}</li>
+            <li class="list-group-item">User: {{product.payload.doc.data().user}}</li>
           </ul>
           <div class="card-body">
             <a class="card-link btn btn-primary text-white" (click)="onRespondProduct(product)">Respond</a>

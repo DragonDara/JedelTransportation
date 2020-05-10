@@ -7,7 +7,6 @@
     {{error}}
   </p>
 </div>
-
 <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
     <div class="form-row">
       <div 
@@ -89,7 +88,7 @@
       </div>
       <div class="form-group col-md-6" *ngIf="!isLoginMode">
         <label for="picture">Picture</label>
-        <input type="file" class="form-control-file" id="picture" name="picture" required ngModel #image (change)="preview(image.files)">
+        <input type="file" class="form-control-file" id="picture" name="picture" ngModel #image (change)="preview(image.files)">
         <span style="color:red;" *ngIf="message">{{message}}</span>
         <img  [src]="base64"  height="150" width="200px" *ngIf="base64"> <br/>
       </div>

@@ -5,7 +5,7 @@ import { AuthService, IAuthResponseData } from './auth.service';
 import { Subscription, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { flatMap } from 'rxjs/operators';
-import { User, UserInfo } from './user.model';
+import { User, UserInfo, Role } from './user.model';
 
 @Component({
   selector: 'app-auth',
@@ -21,6 +21,7 @@ export class AuthComponent implements OnInit {
   public error: string = null;
   public message: string;
   base64: any = null;
+  public image:string;
 
   private userInfo: User;
 
@@ -33,7 +34,6 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit(authForm: NgForm) : void {
-    this.authService.userInfoFromProfile(authForm.value.email);
     if(!authForm.valid){
       return;
     }
@@ -54,32 +54,58 @@ export class AuthComponent implements OnInit {
     }
     
     if(this.isLoginMode){
-      this.authService.login(email, password);
+      this.authService.login(email, password).then(async(res) => {
+        await this.authService.userInfoFromProfile(email)
+          .then(
+            (res) => {
+              this.isLoading = false;
+              this.router.navigate(['/products']);
+            },
+          )
+          .catch(err => {
+            this.isLoading = false;
+            this.error = err;
+            setInterval(() => {
+              this.isLoading = true;
+            },1000)
+          });
+      }).catch(err => {
+        this.isLoading = false;
+        this.error = err;
+        setInterval(() => {
+          this.error = null;
+        },1000)
+      })
     }
     else{
       this.authService.signup(userinfo, password).then( success => {
-        const userinfo: UserInfo = {
+        var userinfo1: UserInfo = {
           email: success.email,
           surname: surname,
           name: name,
           phone: phone,
-          image: this.base64,
-          id: success.id
+          image: this.image,
+          id: success.localId,
+          role: Role.User
         }
-        this.authService.userInfoToProfile(userinfo)
-          .subscribe(
-            res => {
-              
-            },
-            err =>{
-              console.log(err);
-            },
-            () =>{
-              console.log("auth component userinftoprofile completed");
-              this.isLoading = false;
-              this.router.navigate(['/auth']);
-            }
-          );
+        this.authService.saveUserImage(userinfo1).then(
+          res => {
+            userinfo1.image = res;
+            this.authService.userInfoToProfile(userinfo1).subscribe(
+              res => {
+                this.isLoading = false;
+                this.router.navigate(['/products']);
+              },
+              err =>{
+                console.log(err);
+              },
+              () =>{
+                console.log("auth component userinftoprofile completed");
+                
+              }
+            );
+          }
+        )
       })
       .catch(err =>{
         console.log(err);
@@ -109,5 +135,6 @@ export class AuthComponent implements OnInit {
     reader.onload = (_event) => { 
       this.base64 = reader.result; 
     }
+    this.image = files[0];
   }
 }

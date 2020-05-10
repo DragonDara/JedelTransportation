@@ -1,0 +1,27 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">When</th>
+        <th scope="col">Destination</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Currency</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products; let index = i">
+            <th scope="row"> <a [routerLink]="['/userproduct',product.productid, 'profile']" >{{product.productid}}</a> </th>
+            <td>{{product.name}}</td>
+            <td>{{product.when}}</td>
+            <td>{{product.whereto}}</td>
+            <td>{{product.cost}}</td>
+            <td>{{product.currency}}</td>
+            <td *ngIf="product.status===1;else red"><div class="p-3 mb-2 bg-success"></div></td>
+            <td> <button class="btn btn-danger" (click)="onDeleteProduct(product,index)">Delete</button> </td>
+        </tr>
+    </tbody>
+  </table>
+  <ng-template #red><div class="p-3 m-2 bg-danger"></div></ng-template>

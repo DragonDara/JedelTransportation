@@ -8,7 +8,7 @@
         <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
             <div class="form-row">
               <div class="form-group col-md-3">
-                <label for="name">Prodcut Name</label>
+                <label for="name">Product Name</label>
                 <input type="text" class="form-control" id="name" placeholder="Name" name="name" ngModel required #name="ngModel">
                 <span class="text-danger" *ngIf="!name.valid && name.touched">Please enter a name</span>
               </div>
@@ -18,13 +18,16 @@
                 <span class="text-danger" *ngIf="!weight.valid && weight.touched">Please enter a weight</span>
               </div>
               <div class="form-group col-md-2">
-                <label for="volume">Volume</label>
-                <input type="text" class="form-control" id="volume" placeholder="Volume" name="volume" ngModel>
+                <label for="cost">Cost</label>
+                <input type="text" class="form-control" id="cost" placeholder="Cost" name="cost" ngModel #cost="ngModel">
+                <span class="text-danger" *ngIf="!cost.valid && cost.touched">Please enter a cost</span>
               </div>
               <div class="form-group col-md-2">
-                <label for="cost">Cost</label>
-                <input type="text" class="form-control" id="cost" placeholder="Cost" name="cost" required ngModel #cost="ngModel">
-                <span class="text-danger" *ngIf="!cost.valid && cost.touched">Please enter a cost</span>
+                <label for="currency">Currency</label>
+                <select class="form-control" id="currency" name="currency" required ngModel #currency="ngModel">
+                  <option *ngFor="let currency of currencies" [ngValue]="currency">{{currency.name}}</option>
+                </select>
+                <span class="text-danger" *ngIf="!currency.valid && currency.touched">Please enter a currency</span>
               </div>
               <div class="form-group col-md-2">
                 <label for="producttype">Product Type</label>
@@ -34,12 +37,34 @@
                 <span class="text-danger" *ngIf="!producttype.valid && producttype.touched">Please enter a producttype</span>
               </div>
             </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="when">When</label>
+                <input type="date" class="form-control" id="when" placeholder="When" name="when" ngModel required #when="ngModel">
+                <span class="text-danger" *ngIf="!when.valid && when.touched">Please enter a date</span>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="wherefrom">From</label>
+                <input type="text" class="form-control" id="wherefrom" placeholder="From" name="wherefrom" ngModel required #wherefrom="ngModel">
+                <span class="text-danger" *ngIf="!wherefrom.valid && wherefrom.touched">Please enter a sender</span>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="whereto">To</label>
+                <input type="text" class="form-control" id="whereto" placeholder="To" name="whereto" ngModel required #whereto="ngModel">
+                <span class="text-danger" *ngIf="!whereto.valid && whereto.touched">Please enter a destination</span>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="volume">Volume</label>
+                <input type="text" class="form-control" id="volume" placeholder="Volume" name="volume" ngModel>
+              </div>
+            </div>
             <div class="form-group">
                 <label for="picture">Picture</label>
-                <input type="file" multiple="" class="form-control-file" id="picture" name="picture" required ngModel #image (change)="preview(image.files)">
+                <input type="file" class="form-control-file" id="picture" name="picture" ngModel #image (change)="preview(image.files)">
                 <span style="color:red;" *ngIf="message">{{message}}</span>
                 <img *ngFor='let url of images'  [src]="url" height="150" width="200px" style="margin: 3px;"> <br/>
             </div>
+            
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="description">Description</label>

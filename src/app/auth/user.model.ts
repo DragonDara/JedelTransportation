@@ -26,6 +26,7 @@ export class UserInfo{
         public phone: string,
         public image: string,
         public id: string,
+        public role?: Role
       
     ) { 
 
@@ -35,6 +36,11 @@ export class UserInfo{
         this.phone = phone;
         this.image = image;
         this.id = id;
+        this.role = role
     }
 }
 
+export enum Role {
+    User = 'User',
+    Admin = 'Admin'
+}

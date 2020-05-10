@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col-4 mt-3" >
+          <div class="card mx-auto p-3" style="width: 18rem;"  style="margin: 3px;">
+            <img class="card-img-top" [src]="userdata.image" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"> Full Name: {{userdata.surname}} {{userdata.name}}</h5>
+              <p class="card-text"> </p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Email: {{ userdata.email}}</li>
+              <li class="list-group-item">Phone: {{ userdata.phone}}</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+  </div>

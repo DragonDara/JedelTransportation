@@ -1,0 +1,61 @@
+<form *ngIf="isLoaded" [formGroup]="form"  (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="productname">Product Name</label>
+            <input type="text" class="form-control" id="productname" placeholder="Product Name" name="productname" formControlName="productname" #productname >
+            <input type="hidden" formControlName="productid">
+            <!-- <span class="text-danger" *ngIf="editMode">Please enter a product name</span> -->
+        </div>
+        <div class="form-group col-md-3">
+            <label for="weight">Weight</label>
+            <input type="number" class="form-control" id="weight" placeholder="Weight" name="weight" formControlName="weight">
+            <!-- <span class="text-danger" *ngIf="!weight.valid && weight.touched && editMode">Please enter a weight</span> -->
+        </div>
+        <div class="form-group col-md-2">
+            <label for="volume">Volume</label>
+            <input type="text" class="form-control" id="volume" placeholder="Volume" name="volume" formControlName="volume" >
+            <!-- <span class="text-danger" *ngIf="!volume.valid && volume.touched && editMode">Please enter a volume</span> -->
+        </div>
+        <div class="form-group col-md-2">
+            <label for="cost">Cost</label>
+            <input type="text" class="form-control" id="cost" placeholder="Cost" name="cost" formControlName="cost" >
+            <!-- <span class="text-danger" *ngIf="!cost.valid && cost.touched && editMode">Please enter a cost</span> -->
+        </div>
+        <div class="form-group col-md-2">
+            <label for="producttype">Product Type</label>
+            <!-- <select class="form-control" id="producttype" name="producttype" formControlName="producttype">
+                <option *ngFor="let type of producttypes" [ngValue]="type">{{type.name}}</option>
+            </select> -->
+            <input type="text" class="form-control" id="producttype" placeholder="Enter Product Type" name="producttype" formControlName="producttype" readonly>
+        </div>
+    </div>
+    <!-- <div class="form-group">
+        <label for="picture">Picture</label>
+        <input type="file" multiple="" class="form-control-file" id="picture" name="picture" ngModel #image (change)="preview(image.files)">
+        <span style="color:red;" *ngIf="message">{{message}}</span>
+        <img *ngFor='let url of images'  [src]="url" height="150" width="200px" style="margin: 3px;"> <br/>
+    </div> -->
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" rows="3" name="description" formControlName="description" ></textarea>
+            <!-- <span class="text-danger" *ngIf="!description.valid && description.touched && editMode">Please enter a description</span> -->
+        </div>
+        <!-- <div formArrayName="accepted" > -->
+            <div class="form-group col-md-3" *ngIf="!isAccepted;else afterAccepted" >
+                <label >Responded by users:</label>
+                <ul class="list-group" *ngFor="let user of getAcceptedUsers().value.email; index as i" >
+                    <li class="list-group-item" ><a [routerLink]="['/',getAcceptedUsers().value.id[i],'user',user]">{{user}}</a>
+                        <button *ngIf="!isNoRespond" type="button" style="margin-left: 80px;" (click)="onAddAcceptedProduct(i)" class="btn btn-primary btn-sm">Accept</button>
+                    </li>
+                </ul>
+            </div>
+            <ng-template #afterAccepted>
+                <div class="form-group col-md-3" >
+                    <p>Accepted by {{acceptedUser}}</p>
+                </div>
+            </ng-template>
+        <!-- </div> -->
+    </div>
+</form>
+

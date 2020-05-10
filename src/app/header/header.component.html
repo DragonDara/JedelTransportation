@@ -17,6 +17,9 @@
         </li>
       </ul>
       <ul class="nav navbar-nav my-2 my-lg-0">
+        <li class="nav-item" *ngIf="isAuthenticated && isAdmin">
+          <a class="nav-link " [routerLink]="['/admin']" >Admin</a>
+        </li>
         <li class="nav-item" *ngIf="!isAuthenticated">
           <a class="nav-link " [routerLink]="['/auth']">Login</a>
         </li>
@@ -24,10 +27,9 @@
           <div ngbDropdown class="d-inline-block">
             <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> Hello, {{username}} </button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button ngbDropdownItem (click)="onDeliverProduct()">Profile</button>
-              <button ngbDropdownItem (click)="onReceiveProduct()">Message</button>
-              <button ngbDropdownItem (click)="onDeliverProduct()">Optione</button>
-              <button ngbDropdownItem (click)="onReceiveProduct()">Exit</button>
+              <button ngbDropdownItem (click)="onMyProfile()">Profile</button>
+              <button ngbDropdownItem (click)="onMessages()">Message</button>
+              <button ngbDropdownItem (click)="onUserProduct()">My Products</button>
             </div>
           </div>
         </li>
