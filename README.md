@@ -1,7 +1,7 @@
 # JedelTransportation
 This project was developed by teaching myself Angular.
 ## Development server
-Clone project locally using the following command `git clone https://github.com/DragonDara/JedelTransportation.git`. 
+Clone project locally using the following command  `git clone https://github.com/DragonDara/JedelTransportation.git`. 
 
 Then, navigate to the root folder of the project and run `npm i` for installing locally necessary dependencies.
 
